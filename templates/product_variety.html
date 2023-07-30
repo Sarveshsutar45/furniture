@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Varieties</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        /* Custom CSS for product varieties */
+        .product-variety-card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .product-variety-image {
+            max-height: 200px;
+            object-fit: cover;
+        }
+
+        .product-variety-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .product-variety-description {
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Product Varieties</h1>
+        <div class="row mt-4">
+            {% for variety in variety_data %}
+            <div class="col-md-4 mb-4">
+                <div class="product-variety-card">
+                    <img src="{{ url_for('static', filename='variety_img/' + variety.variety_image) }}" class="product-variety-image" alt="{{ variety.variety_name }}">
+                    <div class="product-variety-details">
+                        <h3 class="product-variety-title">{{ variety.variety_name }}</h3>
+                        <p class="product-variety-description">{{ variety.variety_description }}</p>
+                        <!-- Add any other details here if needed -->
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (Make sure to include jQuery and Popper.js before this) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    {% include 'footer.html' %}
+</body>
+</html>

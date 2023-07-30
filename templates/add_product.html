@@ -6,29 +6,59 @@
     <title>Add Products</title>
 </head>
 <body>
-    {% include 'nav.html' %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">
+            <img src="static/logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top mx-2">
+        </a>
+        <button class="navbar-toggler mx-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" data-bs-toggle="collapse"
+            data-bs-target=".navbar-collapse.show">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-<!-- Product Form -->
-<div class="container mt-4">
-    <h2>Add Product</h2>
-    <form method="POST" action="/add_product" enctype="multipart/form-data">
-        <div class="mb-3">
-            <label for="name" class="form-label">Name</label>
-            <input type="text" class="form-control" id="name" name="name" required>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link mx-2" href="add_variety">Add Variety</a>
+                </li>
+            </ul>
         </div>
-        <div class="mb-3">
-            <label for="description" class="form-label">Description</label>
-            <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
-        </div>
-        <div class="mb-3">
-            <label for="image" class="form-label">Image</label>
-            <input type="file" class="form-control" id="image" name="image" accept=".png, .jpg, .jpeg, .gif" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-</div>
+    </nav>
 
-{% include 'footer.html' %}
+    <!-- Product Form -->
+    <div class="container mt-4">
+        <h2>Add Product</h2>
+        <form method="POST" action="/add_product" enctype="multipart/form-data" onsubmit="return validateForm()">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Image (Accepted formats: .png, .jpg, .jpeg, .gif)</label>
+                <input type="file" class="form-control" id="image" name="image" accept=".png, .jpg, .jpeg, .gif" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
 
+    {% include 'footer.html' %}
+
+    <script>
+        function validateForm() {
+            // Basic validation to check if name and description are not empty
+            var name = document.getElementById("name").value;
+            var description = document.getElementById("description").value;
+
+            if (name.trim() === "" || description.trim() === "") {
+                alert("Name and description cannot be empty.");
+                return false;
+            }
+            return true;
+        }
+    </script>
 </body>
 </html>
